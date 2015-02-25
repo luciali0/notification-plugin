@@ -74,7 +74,8 @@ public enum Phase {
         Result             result       = run.getResult();
         ParametersAction   paramsAction = run.getAction(ParametersAction.class);
         EnvVars            environment  = run.getEnvironment( listener );
-        StringBuilder      log          = this.getLog(run, target);
+        // StringBuilder      log          = this.getLog(run, target);
+        long               duration     = run.getDuration();
 
         jobState.setName( job.getName());
         jobState.setUrl( job.getUrl());
@@ -84,15 +85,19 @@ public enum Phase {
         buildState.setUrl( run.getUrl());
         buildState.setPhase( this );
         buildState.setScm( scmState );
-        buildState.setLog( log );
+        // buildState.setLog( log );
+        buildState.setId( run.getId() );
+        buildState.setTimestamp( run.getTimeInMillis() );
+
+        buildState.setDuration(duration);
 
         if ( result != null ) {
             buildState.setStatus(result.toString());
         }
 
-        if ( rootUrl != null ) {
-            buildState.setFullUrl(rootUrl + run.getUrl());
-        }
+        //if ( rootUrl != null ) {
+        buildState.setFullUrl("https://ci.twitter.biz/" + run.getUrl());
+        //}
 
         buildState.updateArtifacts( job, run );
 

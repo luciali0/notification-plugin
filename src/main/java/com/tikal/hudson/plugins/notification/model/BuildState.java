@@ -49,6 +49,12 @@ public class BuildState {
 
     private StringBuilder log;
 
+    private String id;
+
+    private long duration;
+
+    private long timestamp;
+
     /**
      *  Map of artifacts: file name => Map of artifact locations ( location name => artifact URL )
      *  ---
@@ -60,6 +66,30 @@ public class BuildState {
      *     archive: http://localhost:8080/job/notification-plugin/78/artifact/target/notification.jar
      */
     private final Map<String, Map<String, String>> artifacts = new HashMap<String, Map<String, String>>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public long getDuration(){
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public int getNumber() {
         return number;
